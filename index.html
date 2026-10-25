@@ -70,9 +70,8 @@ button { font: inherit; color: inherit; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 8px; }
 ::selection { background: var(--accent); color: var(--ink); }
 
-/* lvh = the tallest the viewport gets, so the phone's address bar showing or hiding never resizes these */
-#bg, #grain { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; height: 100lvh; display: block; z-index: -1; pointer-events: none; }
-#grain { background-repeat: repeat; }
+/* lvh = the tallest the viewport gets, so the phone's address bar showing or hiding never resizes it */
+#bg { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; height: 100lvh; display: block; z-index: -1; pointer-events: none; }
 
 .wrap {
   padding-left: max(16px, env(safe-area-inset-left, 0px));
@@ -386,7 +385,6 @@ footer { margin-top: 40px; padding-block: 26px 40px; border-top: 1px solid var(-
   <symbol id="arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 </svg>
 <canvas id="bg" aria-hidden="true"></canvas>
-<div id="grain" aria-hidden="true"></div>
 
 <nav class="nav glass" aria-label="Main">
   <a class="mark" href="#top">O<span>p</span>.</a>
@@ -698,8 +696,9 @@ footer { margin-top: 40px; padding-block: 26px 40px; border-top: 1px solid var(-
     const fail = () => { c.remove(); document.documentElement.classList.add("no-gl"); };
     if (!gl) return fail();
     const vs = "attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}";
-    // highp where the GPU has it: phone GPUs run mediump at 16-bit, which turns noise blocky and banded.
-    // The hash avoids sin() for the same reason (sin-based hashes fall apart at low precision).
+    // Silk, not noise: the field is built only from smooth sine waves folded into each other, so it has no
+    // fine texture to turn grainy at any resolution. highp where available keeps phone GPUs from banding;
+    // the last line nudges each pixel by under one colour step, which hides banding without visible grain.
     const fs = `#ifdef GL_FRAGMENT_PRECISION_HIGH
 precision highp float;
 #else
@@ -707,26 +706,27 @@ precision mediump float;
 #endif
 uniform vec2 r;uniform float t;uniform vec2 m;uniform float s;
 float h(vec2 p){vec3 q=fract(vec3(p.xyx)*.1031);q+=dot(q,q.yzx+33.33);return fract((q.x+q.y)*q.z);}
-float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);
-return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}
-float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<5;i++){v+=a*n(p);p=p*2.03+vec2(1.7,9.2);a*=.5;}return v;}
 void main(){
   vec2 uv=gl_FragCoord.xy/r;
-  vec2 p=(gl_FragCoord.xy-.5*r)/r.y;
-  float T=t*.045;
-  vec2 q=vec2(fbm(p*1.3+vec2(0.,T)),fbm(p*1.3+vec2(5.2,1.3)-T));
-  vec2 w=vec2(fbm(p*1.15+2.2*q+vec2(1.7,9.2)+T*1.2),fbm(p*1.15+2.2*q+vec2(8.3,2.8)-T*.8));
-  float f=fbm(p*1.05+2.6*w);
-  vec3 col=vec3(.018,.022,.034);
-  col=mix(col,vec3(.13,.2,.72),smoothstep(.36,.88,f)*.9);
-  col=mix(col,vec3(.03,.5,.54),smoothstep(.42,.92,w.y)*.75);
-  col+=vec3(.95,.42,.2)*.3*pow(smoothstep(.48,1.,f*q.x*1.7),3.);
+  vec2 p=(gl_FragCoord.xy-.5*r)/min(r.x,r.y);
+  float T=t*.09;
+  vec2 q=p*1.1;
+  for(int i=1;i<5;i++){
+    float k=float(i);
+    q+=(.42/k)*vec2(sin(k*1.2*q.y+T*(.7+.11*k)+k),cos(k*1.05*q.x-T*(.55+.13*k)+2.*k));
+  }
+  float f=.5+.5*sin(q.x*1.1+q.y*.8);
+  float g=.5+.5*cos(q.x*.75-q.y*1.25+1.7);
+  vec3 col=vec3(.016,.02,.034);
+  col=mix(col,vec3(.12,.19,.74),smoothstep(.22,.95,f)*.85);
+  col=mix(col,vec3(.03,.48,.53),smoothstep(.5,1.,g)*.62);
+  col+=vec3(.95,.42,.2)*.2*smoothstep(.72,1.,f*g);
   float md=length(p-m);
-  col+=vec3(.36,.45,.95)*.16*exp(-md*md*4.);
-  col*=mix(.45,1.,smoothstep(.0,.85,uv.y));
+  col+=vec3(.36,.45,.95)*.13*exp(-md*md*3.);
+  col*=mix(.42,1.,smoothstep(0.,.85,uv.y));
   col*=mix(1.,.5,s);
-  col*=1.-.32*dot(uv-.5,uv-.5)*2.;
-  col+=(h(gl_FragCoord.xy)-.5)*(1.5/255.);
+  col*=1.-.3*dot(uv-.5,uv-.5)*2.;
+  col+=(h(gl_FragCoord.xy)-.5)*(.9/255.);
   gl_FragColor=vec4(col,1.);
 }`;
     const sh = (type, src) => { const x = gl.createShader(type); gl.shaderSource(x, src); gl.compileShader(x); if (!gl.getShaderParameter(x, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(x)); return x; };
@@ -748,7 +748,7 @@ void main(){
     // Resolution follows a pixel budget instead of a fixed fraction: phones (few CSS pixels, dense screens)
     // render sharper, big desktop windows stay cheap. Slow devices step quality down automatically.
     const dpr = Math.min(window.devicePixelRatio || 1, 3);
-    const BUDGET = 950000;
+    const BUDGET = 1200000;
     let quality = 1, slowAcc = 0, slowFrames = 0;
     let mx = 0.35, my = 0.25, tx = mx, ty = my, drawn = false;
     const t0 = performance.now();
@@ -763,8 +763,9 @@ void main(){
     addEventListener("resize", () => { size(); wake(); });
     addEventListener("scroll", () => { drawn = false; wake(); }, { passive: true });
     addEventListener("pointermove", (e) => {
-      tx = (e.clientX - innerWidth / 2) / innerHeight;
-      ty = -(e.clientY - innerHeight / 2) / innerHeight;
+      const cw = c.clientWidth || innerWidth, ch = c.clientHeight || innerHeight, unit = Math.min(cw, ch);
+      tx = (e.clientX - cw / 2) / unit;
+      ty = -(e.clientY - ch / 2) / unit;
       wake();
     }, { passive: true });
     loops.add({
@@ -788,22 +789,6 @@ void main(){
       },
     });
     wake();
-  })();
-
-  /* ---------- film grain at the screen's own pixel size (static, so it costs nothing per frame) ---------- */
-  (() => {
-    const el = $("#grain"), d = Math.min(3, window.devicePixelRatio || 1), n = 160;
-    const cv = document.createElement("canvas");
-    cv.width = cv.height = n;
-    const g = cv.getContext("2d"), img = g.createImageData(n, n);
-    for (let i = 0; i < img.data.length; i += 4) {
-      const v = Math.random() < 0.5 ? 0 : 255;
-      img.data[i] = img.data[i + 1] = img.data[i + 2] = v;
-      img.data[i + 3] = Math.random() * 16;
-    }
-    g.putImageData(img, 0, 0);
-    el.style.backgroundImage = `url(${cv.toDataURL()})`;
-    el.style.backgroundSize = `${n / d}px ${n / d}px`;
   })();
 
   /* ---------- spotlight borders on cards ---------- */
