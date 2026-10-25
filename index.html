@@ -704,14 +704,14 @@ precision highp float;
 #else
 precision mediump float;
 #endif
-uniform vec2 r;uniform float t;uniform vec2 m;uniform float s;
+uniform vec2 r;uniform float t;uniform vec2 m;uniform float s;uniform float u;
 float h(vec2 p){vec3 q=fract(vec3(p.xyx)*.1031);q+=dot(q,q.yzx+33.33);return fract((q.x+q.y)*q.z);}
 float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);
 return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}
 float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<5;i++){v+=a*n(p);p=p*2.03+vec2(1.7,9.2);a*=.5;}return v;}
 void main(){
   vec2 uv=gl_FragCoord.xy/r;
-  vec2 p=(gl_FragCoord.xy-.5*r)/r.y;
+  vec2 p=(gl_FragCoord.xy-.5*r)/u;
   float T=t*.045;
   vec2 q=vec2(fbm(p*1.3+vec2(0.,T)),fbm(p*1.3+vec2(5.2,1.3)-T));
   vec2 w=vec2(fbm(p*1.15+2.2*q+vec2(1.7,9.2)+T*1.2),fbm(p*1.15+2.2*q+vec2(8.3,2.8)-T*.8));
@@ -742,14 +742,23 @@ void main(){
     const loc = gl.getAttribLocation(prog, "a");
     gl.enableVertexAttribArray(loc);
     gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-    const uR = gl.getUniformLocation(prog, "r"), uT = gl.getUniformLocation(prog, "t"), uM = gl.getUniformLocation(prog, "m"), uS = gl.getUniformLocation(prog, "s");
-    const SCALE = 0.5;
+    const uR = gl.getUniformLocation(prog, "r"), uT = gl.getUniformLocation(prog, "t"), uM = gl.getUniformLocation(prog, "m"), uS = gl.getUniformLocation(prog, "s"), uU = gl.getUniformLocation(prog, "u");
+    // One pattern unit spans the viewport height on landscape screens (exactly the launch look on desktop)
+    // and 90% of the width on portrait ones, so a phone shows the same sweep of swirls as a desktop instead
+    // of a thin zoomed-in slice. Render density follows the pattern (450 render pixels per unit, the launch
+    // desktop density), so the softness matches on every screen.
+    const PX_PER_UNIT = 450;
+    const dpr = Math.min(window.devicePixelRatio || 1, 3);
+    let L = 1, unit = PX_PER_UNIT;
     let mx = 0.35, my = 0.25, tx = mx, ty = my, drawn = false;
     const t0 = performance.now();
     function size() {
       const cw = c.clientWidth || innerWidth, ch = c.clientHeight || innerHeight;
-      const w = Math.max(1, Math.round(cw * SCALE)), h = Math.max(1, Math.round(ch * SCALE));
+      L = Math.min(ch, cw * 0.9);
+      const k = Math.min(dpr, Math.max(0.5, PX_PER_UNIT / L));
+      const w = Math.max(1, Math.round(cw * k)), h = Math.max(1, Math.round(ch * k));
       if (c.width !== w || c.height !== h) { c.width = w; c.height = h; gl.viewport(0, 0, w, h); }
+      unit = L * (w / cw);
       drawn = false;
     }
     size();
@@ -757,8 +766,8 @@ void main(){
     addEventListener("scroll", () => { drawn = false; wake(); }, { passive: true });
     addEventListener("pointermove", (e) => {
       const cw = c.clientWidth || innerWidth, ch = c.clientHeight || innerHeight;
-      tx = (e.clientX - cw / 2) / ch;
-      ty = -(e.clientY - ch / 2) / ch;
+      tx = (e.clientX - cw / 2) / L;
+      ty = -(e.clientY - ch / 2) / L;
       wake();
     }, { passive: true });
     loops.add({
@@ -767,6 +776,7 @@ void main(){
       tick(dt, now) {
         mx += (tx - mx) * 0.05; my += (ty - my) * 0.05;
         gl.uniform2f(uR, c.width, c.height);
+        gl.uniform1f(uU, unit);
         gl.uniform1f(uT, reduce ? 24 : (now - t0) / 1000);
         gl.uniform2f(uM, mx, my);
         gl.uniform1f(uS, Math.min(1, scrollY / (innerHeight * 1.1)));
