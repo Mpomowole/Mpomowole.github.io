@@ -709,8 +709,8 @@ float h(vec2 p){vec3 q=fract(vec3(p.xyx)*.1031);q+=dot(q,q.yzx+33.33);return fra
 void main(){
   vec2 uv=gl_FragCoord.xy/r;
   vec2 p=(gl_FragCoord.xy-.5*r)/min(r.x,r.y);
-  float T=t*.09;
-  vec2 q=p*1.1;
+  float T=t*.55;
+  vec2 q=p*1.1+vec2(.22*sin(T*.23),.18*cos(T*.19));
   for(int i=1;i<5;i++){
     float k=float(i);
     q+=(.42/k)*vec2(sin(k*1.2*q.y+T*(.7+.11*k)+k),cos(k*1.05*q.x-T*(.55+.13*k)+2.*k));
