@@ -126,15 +126,6 @@ h1 .l2 {
 .lead { margin-top: 28px; max-width: 46ch; font-size: clamp(17px, 1.55vw, 20px); line-height: 1.5; color: var(--muted); }
 .lead strong { color: var(--fg); font-weight: 500; }
 .cta { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 10px; }
-.reach { margin-top: 18px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 22px; font-family: var(--mono); font-size: 13px; color: var(--muted); }
-.reach-item { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); text-decoration: none; white-space: nowrap; }
-a.reach-item:hover { color: var(--fg); }
-#hero-email { color: var(--fg); user-select: all; }
-.reach-copy { font: 11px var(--mono); color: var(--muted); background: rgba(255, 255, 255, 0.05); border: 1px solid var(--line-2); border-radius: 6px; padding: 3px 8px; cursor: pointer; transition: color 0.15s, border-color 0.15s; }
-.reach-copy:hover { color: var(--fg); border-color: rgba(142, 168, 255, 0.6); }
-.reach-work { color: var(--accent); }
-.nav a.nav-cta { background: var(--fg); color: var(--ink); font-weight: 500; }
-.nav a.nav-cta:hover { background: #fff; color: var(--ink); }
 .btn {
   display: inline-flex; align-items: center; gap: 10px; height: 46px; padding: 0 20px;
   border-radius: 999px; border: 1px solid var(--line-2); background: rgba(255, 255, 255, 0.05);
@@ -399,8 +390,8 @@ footer { margin-top: 40px; padding-block: 26px 40px; border-top: 1px solid var(-
   <a class="mark" href="#top">O<span>p</span>.</a>
   <a href="#work">Work</a>
   <a class="hide-sm" href="#experience">Experience</a>
+  <a href="#contact">Contact</a>
   <button type="button" data-cmdk aria-label="Open command menu"><svg aria-hidden="true"><use href="#search"/></svg><kbd class="kbd-mod">⌘K</kbd></button>
-  <a class="nav-cta" href="#contact">Contact</a>
 </nav>
 
 <header class="hero wrap" id="top">
@@ -410,14 +401,8 @@ footer { margin-top: 40px; padding-block: 26px 40px; border-top: 1px solid var(-
       <h1 class="rise d1" aria-label="Omowole Precious"><span>Omowole</span><span class="l2">Precious</span></h1>
       <p class="lead rise d2">Full-stack developer at the <strong>Lagos State Internal Revenue Service</strong>. I design and ship data pipelines, ID verification and internal tools, plus web and Android apps of my own.</p>
       <div class="cta rise d3">
-        <a class="btn primary" href="mailto:mpomowole@gmail.com">Email me <svg aria-hidden="true"><use href="#arrow"/></svg></a>
-        <a class="btn" href="https://wa.me/2348124786454" target="_blank" rel="noopener">WhatsApp</a>
-        <a class="btn" href="Omowole_Precious_CV.pdf" target="_blank" rel="noopener">Download CV</a>
-      </div>
-      <div class="reach rise d4">
-        <span class="reach-item"><span id="hero-email">mpomowole@gmail.com</span><button class="reach-copy" id="hero-copy" type="button">Copy</button></span>
-        <a class="reach-item" href="tel:+2348124786454">+234 812 478 6454</a>
-        <a class="reach-item reach-work" href="#work">See the work ↓</a>
+        <a class="btn primary" href="#work">See the work <svg aria-hidden="true"><use href="#arrow"/></svg></a>
+        <a class="btn" href="#contact">Contact me</a>
       </div>
     </div>
     <aside class="now glass rise d4" aria-label="Right now">
@@ -1077,7 +1062,6 @@ void main(){
   }
   const copyEmail = () => copyText("mpomowole@gmail.com", "#email", $("#copy"), "Copy email");
   $("#copy").addEventListener("click", copyEmail);
-  $("#hero-copy").addEventListener("click", (e) => copyText("mpomowole@gmail.com", "#hero-email", e.currentTarget, "Copy"));
 
   /* ---------- command menu ---------- */
   (() => {
