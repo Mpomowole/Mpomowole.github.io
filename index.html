@@ -10,7 +10,13 @@
 <meta property="og:url" content="https://mpomowole.github.io/">
 <meta property="og:title" content="Omowole Precious Michael">
 <meta property="og:description" content="Full-stack developer in Lagos. Systems for the Lagos State Internal Revenue Service, plus web and Android apps.">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://mpomowole.github.io/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Omowole Precious Michael, full-stack developer in Lagos">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://mpomowole.github.io/og.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Omowole Precious Michael","url":"https://mpomowole.github.io/","jobTitle":"Full-stack developer","worksFor":{"@type":"GovernmentOrganization","name":"Lagos State Internal Revenue Service"},"address":{"@type":"PostalAddress","addressLocality":"Lagos","addressCountry":"NG"},"email":"mailto:mpomowole@gmail.com","telephone":"+2348124786454","alumniOf":{"@type":"CollegeOrUniversity","name":"West African Union University"},"knowsAbout":["Go","Rust","TypeScript","Python","React","React Native","Next.js","FastAPI","MySQL","Redis"]}</script>
 <title>Omowole Precious Michael</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Full-stack developer in Lagos. Systems for the Lagos State Internal Revenue Service, plus web and Android apps.">
@@ -25,7 +31,7 @@
   --bg: #05060A;
   --fg: #F3F5F9;
   --muted: #A3AAB7;
-  --faint: #6A7282;
+  --faint: #8B93A4;
   --line: rgba(255, 255, 255, 0.085);
   --line-2: rgba(255, 255, 255, 0.16);
   --well: rgba(3, 4, 8, 0.42);
@@ -89,6 +95,9 @@ button { font: inherit; color: inherit; }
 .eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); }
 .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 10px var(--ok); flex: none; }
 kbd { font-family: var(--mono); font-size: 11px; line-height: 1; padding: 4px 6px; border-radius: 6px; border: 1px solid var(--line-2); color: var(--muted); background: rgba(255, 255, 255, 0.04); }
+
+.skip { position: fixed; z-index: 50; left: max(16px, env(safe-area-inset-left, 0px)); top: -80px; padding: 10px 16px; border-radius: 999px; background: var(--fg); color: var(--ink); font-weight: 500; text-decoration: none; transition: top 0.2s; }
+.skip:focus { top: calc(env(safe-area-inset-top, 0px) + 12px); }
 
 /* ---------- nav ---------- */
 .nav {
@@ -294,7 +303,10 @@ details p { margin-top: 10px; color: var(--muted); }
 @container (max-width: 400px) {
   .qr-wrap { justify-content: center; }
   .qr-side { flex-basis: 100%; }
-  .habits { grid-template-columns: 72px repeat(7, minmax(0, 1fr)) 32px; gap: 4px; }
+  /* habit name sits above its row, so the day squares get the full width and stay comfortably tappable */
+  .habits { grid-template-columns: repeat(7, minmax(0, 1fr)) 34px; gap: 5px; }
+  .habits > span:first-child { display: none; }
+  .habits .hn { grid-column: 1 / -1; margin-top: 4px; }
   .loan { grid-template-columns: minmax(0, 1fr) auto; }
   .loan .who { grid-column: 1; grid-row: 1; }
   .loan .st { grid-column: 2; grid-row: 1; align-self: start; }
@@ -384,6 +396,7 @@ footer { margin-top: 40px; padding-block: 26px 40px; border-top: 1px solid var(-
   <symbol id="search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.5-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
   <symbol id="arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 </svg>
+<a class="skip" href="#work">Skip to the work</a>
 <canvas id="bg" aria-hidden="true"></canvas>
 
 <nav class="nav glass" aria-label="Main">
@@ -401,11 +414,11 @@ footer { margin-top: 40px; padding-block: 26px 40px; border-top: 1px solid var(-
       <h1 class="rise d1" aria-label="Omowole Precious"><span>Omowole</span><span class="l2">Precious</span></h1>
       <p class="lead rise d2">Full-stack developer at the <strong>Lagos State Internal Revenue Service</strong>. I design and ship data pipelines, ID verification and internal tools, plus web and Android apps of my own.</p>
       <div class="cta rise d3">
-        <a class="btn primary" href="#work">See the work <svg aria-hidden="true"><use href="#arrow"/></svg></a>
-        <a class="btn" href="#contact">Contact me</a>
+        <a class="btn primary" href="#work">See the Work <svg aria-hidden="true"><use href="#arrow"/></svg></a>
+        <a class="btn" href="#contact">Contact Me</a>
       </div>
     </div>
-    <aside class="now glass rise d4" aria-label="Right now">
+    <div class="now glass rise d4" role="group" aria-label="Right now">
       <div class="now-head eyebrow"><span><span class="dot"></span>Now</span><span id="clock">Lagos</span></div>
       <div>
         <div class="now-role">Revenue Supervisor</div>
@@ -418,11 +431,11 @@ footer { margin-top: 40px; padding-block: 26px 40px; border-top: 1px solid var(-
         <div><dt>350+</dt><dd>commits on Habit Ledger</dd></div>
       </dl>
       <div class="now-foot"><span>Lagos, Nigeria</span><span>6.52°N 3.37°E</span></div>
-    </aside>
+    </div>
   </div>
 </header>
 
-<div class="strip" aria-label="Tools">
+<div class="strip" aria-hidden="true">
   <div class="strip-mask">
     <div class="strip-track">
       <span>Go</span><span>Rust</span><span>TypeScript</span><span>Python</span><span>React</span><span>Next.js</span><span>React Native</span><span>Expo</span><span>FastAPI</span><span>Redis</span><span>MySQL</span><span>Tailwind CSS</span><span>PHP</span><span>Firebase</span><span>Vercel</span>
