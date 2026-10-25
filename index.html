@@ -188,7 +188,8 @@ h1 .l2 {
   background: linear-gradient(100deg, var(--fg) 8%, var(--accent) 52%, var(--teal) 96%);
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
-.lead { margin-top: 28px; max-width: 46ch; font-size: clamp(17px, 1.55vw, 20px); line-height: 1.5; color: var(--muted); }
+/* em, not ch: ch is the width of "0" in whichever font is showing, so it changed when the web font arrived */
+.lead { margin-top: 28px; max-width: 30em; font-size: clamp(17px, 1.55vw, 20px); line-height: 1.5; color: var(--muted); }
 .lead strong { color: var(--fg); font-weight: 500; }
 .cta { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 10px; }
 .btn {
