@@ -1,0 +1,1118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#05060A">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%238EA8FF'/><stop offset='1' stop-color='%2345D9C8'/></linearGradient></defs><rect width='64' height='64' rx='16' fill='%2305060A'/><circle cx='32' cy='32' r='15' fill='url(%23g)'/></svg>">
+<link rel="canonical" href="https://mpomowole.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mpomowole.github.io/">
+<meta property="og:title" content="Omowole Precious Michael">
+<meta property="og:description" content="Full-stack developer in Lagos. Systems for the Lagos State Internal Revenue Service, plus web and Android apps.">
+<meta name="twitter:card" content="summary">
+<title>Omowole Precious Michael</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Full-stack developer in Lagos. Systems for the Lagos State Internal Revenue Service, plus web and Android apps.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&family=Instrument+Serif:ital@0;1&display=swap">
+<style>
+:root {
+  /* Layout: one living aurora (WebGL) sits behind the whole page and content floats over it on frosted
+     glass: a hero with the name and a "now" card, a bento grid where every tile runs a live demo,
+     a timeline of roles, and a closing contact card. ⌘K opens a command menu anywhere. */
+  --bg: #05060A;
+  --fg: #F3F5F9;
+  --muted: #A3AAB7;
+  --faint: #6A7282;
+  --line: rgba(255, 255, 255, 0.085);
+  --line-2: rgba(255, 255, 255, 0.16);
+  --well: rgba(3, 4, 8, 0.42);
+  --accent: #8EA8FF;
+  --teal: #45D9C8;
+  --ember: #FF8B52;
+  --ok: #5BE49B;
+  --bad: #FF6B6B;
+  --paper: #F3F5F9;
+  --ink: #0A0C12;
+
+  --sans: "Geist", "Segoe UI", system-ui, sans-serif;
+  --serif: "Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --mono: "Geist Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --r: 22px;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 40; background: var(--bg); }
+html.no-gl body {
+  background:
+    radial-gradient(1100px 700px at 15% -10%, rgba(69, 217, 200, 0.16), transparent 60%),
+    radial-gradient(900px 640px at 90% 0%, rgba(80, 110, 255, 0.22), transparent 60%),
+    var(--bg);
+}
+a { color: inherit; }
+p { margin: 0; }
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 8px; }
+::selection { background: var(--accent); color: var(--ink); }
+
+#bg { position: fixed; inset: 0; width: 100%; height: 100%; display: block; z-index: -1; pointer-events: none; }
+
+.wrap {
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.inner { max-width: 1200px; margin: 0 auto; padding-inline: clamp(0px, 2vw, 24px); }
+
+.glass {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.028));
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid var(--line);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 30px 70px -40px rgba(0, 0, 0, 0.8);
+}
+.eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); }
+.dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 10px var(--ok); flex: none; }
+kbd { font-family: var(--mono); font-size: 11px; line-height: 1; padding: 4px 6px; border-radius: 6px; border: 1px solid var(--line-2); color: var(--muted); background: rgba(255, 255, 255, 0.04); }
+
+/* ---------- nav ---------- */
+.nav {
+  position: fixed; z-index: 30;
+  top: calc(env(safe-area-inset-top, 0px) + 14px); left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 2px; padding: 5px;
+  border-radius: 999px; width: max-content; max-width: calc(100% - 32px);
+}
+.nav a, .nav button {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 14px; border-radius: 999px; border: 0; background: none;
+  font-size: 14px; color: var(--muted); text-decoration: none; cursor: pointer; white-space: nowrap;
+  transition: background 0.2s, color 0.2s;
+}
+.nav a:hover, .nav button:hover { color: var(--fg); background: rgba(255, 255, 255, 0.07); }
+.nav .mark { color: var(--fg); font-weight: 600; letter-spacing: -0.03em; }
+.nav .mark span { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 16px; }
+@media (max-width: 480px) { .nav a, .nav button { padding: 8px 10px; font-size: 13.5px; } .nav .hide-sm { display: none; } }
+
+/* ---------- hero ---------- */
+.hero { padding-block: clamp(120px, 15vw, 180px) clamp(56px, 7vw, 88px); }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 40px; align-items: end; }
+.hero-grid > * { min-width: 0; }
+.status { display: inline-flex; align-items: center; gap: 10px; padding: 7px 15px 7px 12px; border-radius: 999px; font-size: 13.5px; text-decoration: none; }
+.status .dot { animation: ping 2.2s infinite; box-shadow: none; }
+@keyframes ping { 0% { box-shadow: 0 0 0 0 rgba(91, 228, 155, 0.6); } 70% { box-shadow: 0 0 0 9px rgba(91, 228, 155, 0); } 100% { box-shadow: 0 0 0 0 rgba(91, 228, 155, 0); } }
+
+h1 { margin-top: 26px; font-weight: 600; font-size: clamp(58px, 10.4vw, 162px); line-height: 0.88; letter-spacing: -0.062em; }
+h1 span { display: block; }
+h1 .l2 {
+  font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: -0.025em; padding-right: 0.08em;
+  background: linear-gradient(100deg, var(--fg) 8%, var(--accent) 52%, var(--teal) 96%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.lead { margin-top: 28px; max-width: 46ch; font-size: clamp(17px, 1.55vw, 20px); line-height: 1.5; color: var(--muted); }
+.lead strong { color: var(--fg); font-weight: 500; }
+.cta { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 10px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 10px; height: 46px; padding: 0 20px;
+  border-radius: 999px; border: 1px solid var(--line-2); background: rgba(255, 255, 255, 0.05);
+  color: var(--fg); font-size: 15px; font-weight: 500; text-decoration: none; cursor: pointer;
+  transition: background 0.2s, box-shadow 0.25s, transform 0.2s;
+}
+.btn:hover { background: rgba(255, 255, 255, 0.1); }
+.btn:active { transform: scale(0.98); }
+.btn.primary { background: var(--fg); color: var(--ink); border-color: transparent; }
+.btn.primary:hover { background: #fff; box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.09); }
+.btn svg { width: 16px; height: 16px; }
+
+.now { border-radius: var(--r); padding: 22px; display: grid; gap: 16px; }
+.now-head { display: flex; justify-content: space-between; align-items: center; }
+.now-head span { display: inline-flex; align-items: center; gap: 8px; }
+.now-role { font-size: 21px; font-weight: 600; letter-spacing: -0.03em; line-height: 1.2; }
+.now-org { color: var(--muted); font-size: 14.5px; margin-top: 2px; }
+.kpis { margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--line); border-radius: 14px; overflow: hidden; border: 1px solid var(--line); }
+.kpis div { background: rgba(5, 6, 10, 0.5); padding: 12px 14px; }
+.kpis dt { font-size: 28px; font-weight: 600; letter-spacing: -0.04em; line-height: 1; font-variant-numeric: tabular-nums; }
+.kpis dd { margin: 6px 0 0; font-size: 12.5px; line-height: 1.3; color: var(--muted); }
+.now-foot { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; font-family: var(--mono); font-size: 12px; color: var(--faint); }
+@media (max-width: 960px) { .hero-grid { grid-template-columns: minmax(0, 1fr); } }
+@media (min-width: 600px) and (max-width: 960px) { .kpis { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (max-width: 480px) { .strip-track span { font-size: 16px; } .strip-track { gap: 32px; } .cta .btn { flex: 1 1 auto; justify-content: center; } }
+
+.rise { animation: rise 1s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.rise.d1 { animation-delay: 0.06s; } .rise.d2 { animation-delay: 0.14s; } .rise.d3 { animation-delay: 0.22s; } .rise.d4 { animation-delay: 0.3s; }
+@keyframes rise { from { transform: translateY(22px); filter: blur(10px); } to { transform: none; filter: none; } }
+
+/* ---------- tool strip ---------- */
+.strip { border-block: 1px solid var(--line); background: rgba(5, 6, 10, 0.4); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+.strip-mask { overflow: hidden; padding-block: 20px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+.strip-track { display: flex; gap: 44px; width: max-content; animation: slide 46s linear infinite; }
+.strip-track span { display: inline-flex; align-items: center; gap: 12px; font-size: 19px; font-weight: 500; letter-spacing: -0.02em; color: var(--muted); white-space: nowrap; }
+.strip-track span::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); opacity: 0.75; }
+@keyframes slide { to { transform: translateX(calc(-50% - 22px)); } }
+
+/* ---------- sections ---------- */
+.sec { padding-block: clamp(84px, 11vw, 140px) 0; }
+.sec-head { display: flex; justify-content: space-between; align-items: end; gap: 20px; flex-wrap: wrap; margin-bottom: 36px; }
+h2 { margin-top: 14px; font-weight: 600; font-size: clamp(36px, 5.4vw, 72px); line-height: 0.98; letter-spacing: -0.048em; max-width: 17ch; }
+h2 em { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: -0.015em; color: var(--accent); }
+.sec-note { color: var(--muted); max-width: 34ch; font-size: 15px; }
+
+/* ---------- bento ---------- */
+.bento { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 16px; }
+.card { position: relative; isolation: isolate; grid-column: span 4; min-width: 0; border-radius: var(--r); padding: 22px; display: flex; flex-direction: column; gap: 16px; }
+.card.s7 { grid-column: span 7; } .card.s5 { grid-column: span 5; } .card.s6 { grid-column: span 6; }
+.card::before {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px; pointer-events: none;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%), rgba(142, 168, 255, 0.7), rgba(69, 217, 200, 0.25) 30%, transparent 55%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  opacity: 0; transition: opacity 0.35s;
+}
+.card::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; z-index: -1; pointer-events: none;
+  background: radial-gradient(520px circle at var(--mx, 50%) var(--my, 0%), rgba(142, 168, 255, 0.09), transparent 50%);
+  opacity: 0; transition: opacity 0.35s;
+}
+.card:hover::before, .card:hover::after { opacity: 1; }
+@media (max-width: 1180px) { .card, .card.s7, .card.s5, .card.s6 { grid-column: span 6; } .card.full-t { grid-column: 1 / -1; } }
+@media (max-width: 900px) { .card, .card.s7, .card.s5, .card.s6 { grid-column: 1 / -1; } .bento { gap: 14px; } }
+@media (max-width: 480px) { .card { padding: 18px; border-radius: 20px; } .demo { padding: 12px; } .card h3 { font-size: 21px; } }
+
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag { font-family: var(--mono); font-size: 11.5px; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line-2); color: var(--muted); text-decoration: none; white-space: nowrap; }
+.tag.lirs { color: var(--ember); border-color: rgba(255, 139, 82, 0.4); }
+a.tag.live { color: var(--accent); border-color: rgba(142, 168, 255, 0.5); transition: background 0.2s, color 0.2s; }
+a.tag.live:hover { background: var(--accent); color: var(--ink); }
+.card h3 { font-size: 23px; font-weight: 600; letter-spacing: -0.035em; line-height: 1.15; }
+.desc { margin-top: 8px; color: var(--muted); font-size: 15px; }
+.demo { container-type: inline-size; background: var(--well); border: 1px solid var(--line); border-radius: 16px; padding: 14px; display: grid; gap: 12px; }
+.demo-head { display: flex; justify-content: space-between; gap: 10px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); }
+.demo-head span:first-child { display: inline-flex; align-items: center; gap: 7px; color: var(--muted); }
+.demo-foot { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.demo-foot b { color: var(--fg); font-weight: 600; font-variant-numeric: tabular-nums; }
+details { font-size: 14.5px; }
+details summary { list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 12.5px; color: var(--accent); }
+details summary::-webkit-details-marker { display: none; }
+details summary::before { content: "+"; display: inline-grid; place-items: center; width: 18px; height: 18px; border-radius: 50%; border: 1px solid rgba(142, 168, 255, 0.45); font-size: 13px; line-height: 1; }
+details[open] summary::before { content: "−"; }
+details p { margin-top: 10px; color: var(--muted); }
+.stack { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--line); font-family: var(--mono); font-size: 12px; color: var(--faint); }
+
+.sbtn { font-family: var(--mono); font-size: 12px; padding: 7px 11px; border-radius: 9px; border: 1px solid var(--line-2); background: rgba(255, 255, 255, 0.04); color: var(--fg); cursor: pointer; transition: background 0.15s, border-color 0.15s, color 0.15s; }
+.sbtn:hover { border-color: rgba(142, 168, 255, 0.6); }
+.sbtn.go { background: var(--fg); color: var(--ink); border-color: transparent; font-weight: 600; }
+.sbtn.go:hover { background: #fff; }
+.sbtn[aria-pressed="true"] { background: var(--accent); color: var(--ink); border-color: transparent; }
+.row { display: flex; flex-wrap: wrap; gap: 6px; }
+.ok { color: var(--ok); } .bad { color: var(--bad); }
+
+/* pipeline */
+#pipe { width: 100%; height: 190px; display: block; }
+
+/* QR */
+.qr-wrap { display: flex; flex-wrap: wrap; gap: 14px; align-items: flex-start; }
+.idcard { position: relative; overflow: hidden; width: 200px; max-width: 100%; flex: none; background: var(--paper); color: var(--ink); border-radius: 14px; padding: 13px; display: grid; gap: 9px; box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.8); transition: transform 0.3s, filter 0.3s; }
+.idcard::before { content: "SAMPLE"; position: absolute; right: -28px; top: 16px; transform: rotate(35deg); background: var(--ember); color: var(--ink); font: 600 9.5px/1 var(--mono); letter-spacing: 0.14em; padding: 4px 30px; }
+.idcard .org { font: 600 9.5px/1.2 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.6; }
+.idcard .person { display: flex; gap: 9px; align-items: center; }
+.idcard .avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--teal)); color: var(--ink); display: grid; place-items: center; font-weight: 700; font-size: 14px; flex: none; }
+.idcard .nm { font-weight: 600; font-size: 14px; line-height: 1.2; letter-spacing: -0.01em; }
+.idcard .rl { font-size: 11.5px; opacity: 0.65; }
+.idcard canvas { width: 100px; height: 100px; display: block; image-rendering: pixelated; }
+.idcard .sid { font: 500 10.5px/1 var(--mono); opacity: 0.7; }
+.idcard.scanning::after { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: var(--accent); box-shadow: 0 0 16px 3px var(--accent); animation: scan 0.65s linear; }
+.idcard.revoked { filter: grayscale(1) brightness(0.8); transform: rotate(-1.5deg); }
+@keyframes scan { to { top: 100%; } }
+.qr-side { flex: 1 1 170px; min-width: 0; display: grid; gap: 10px; align-content: start; }
+.result { border: 1px solid var(--line-2); border-radius: 12px; padding: 10px 12px; font-family: var(--mono); font-size: 12px; min-height: 60px; color: var(--muted); }
+.result strong { display: block; font-family: var(--sans); font-size: 15px; font-weight: 600; margin-bottom: 2px; }
+.result.ok { border-color: rgba(91, 228, 155, 0.5); background: rgba(91, 228, 155, 0.06); }
+.result.ok strong { color: var(--ok); }
+.result.bad { border-color: rgba(255, 107, 107, 0.5); background: rgba(255, 107, 107, 0.06); }
+.result.bad strong { color: var(--bad); }
+.log { list-style: none; margin: 0; padding: 0; font-family: var(--mono); font-size: 11.5px; color: var(--faint); display: grid; gap: 3px; }
+
+/* asset bars */
+.bars { display: grid; gap: 7px; }
+.bar { display: grid; grid-template-columns: 58px minmax(0, 1fr) 28px; align-items: center; gap: 10px; font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
+.bar .tr { height: 12px; border-radius: 6px; background: rgba(255, 255, 255, 0.05); overflow: hidden; }
+.bar .fill { height: 100%; width: 0; border-radius: 6px; background: linear-gradient(90deg, var(--accent), var(--teal)); transition: width 0.7s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.bar.due .fill { background: linear-gradient(90deg, #FF6B4A, var(--ember)); }
+.bar.due { color: var(--ember); }
+.bar .n { text-align: right; color: var(--fg); font-variant-numeric: tabular-nums; }
+
+/* workers */
+.counter { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.counter strong { font-size: 44px; font-weight: 600; letter-spacing: -0.05em; line-height: 0.9; font-variant-numeric: tabular-nums; }
+.counter span { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.lanes { display: grid; gap: 3px; }
+.lane { height: 3px; border-radius: 2px; background: rgba(255, 255, 255, 0.05); overflow: hidden; opacity: 0.4; transition: opacity 0.2s; }
+.lane.busy { opacity: 1; }
+.lane i { display: block; height: 100%; background: linear-gradient(90deg, var(--accent), var(--teal)); transform-origin: left; transform: scaleX(0); }
+
+/* habits */
+.habits { display: grid; grid-template-columns: 84px repeat(7, minmax(0, 1fr)) 38px; gap: 5px; align-items: center; max-width: 440px; font-family: var(--mono); font-size: 11.5px; }
+.habits .hn { color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.habits .dh { text-align: center; color: var(--faint); font-size: 10.5px; }
+.habits .dh.today { color: var(--accent); }
+.cell { aspect-ratio: 1; width: 100%; border-radius: 6px; border: 1px solid var(--line-2); background: transparent; padding: 0; cursor: pointer; transition: background 0.15s, transform 0.15s; }
+.cell:hover { transform: scale(1.08); }
+.cell.on { background: linear-gradient(135deg, var(--accent), var(--teal)); border-color: transparent; }
+.cell.today { box-shadow: 0 0 0 1.5px var(--bg), 0 0 0 3px rgba(142, 168, 255, 0.6); }
+.streak { display: inline-flex; align-items: center; justify-content: flex-end; gap: 3px; color: var(--fg); font-variant-numeric: tabular-nums; }
+.streak svg { width: 10px; height: 12px; fill: var(--faint); }
+.streak.hot svg { fill: var(--ember); filter: drop-shadow(0 0 4px var(--ember)); }
+
+/* ledger */
+.ledger { display: grid; gap: 7px; }
+.loan { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) auto; gap: 6px 14px; align-items: center; text-align: left; width: 100%; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--line); background: transparent; cursor: pointer; transition: border-color 0.2s, background 0.2s; }
+.loan:hover { border-color: var(--line-2); }
+.loan[aria-pressed="true"] { border-color: rgba(142, 168, 255, 0.7); background: rgba(142, 168, 255, 0.07); }
+.loan .who { font-size: 14px; font-weight: 600; letter-spacing: -0.01em; }
+.loan .sub { display: block; font-family: var(--mono); font-size: 11px; color: var(--faint); font-weight: 400; }
+.loan .prog { height: 6px; border-radius: 3px; background: rgba(255, 255, 255, 0.06); overflow: hidden; }
+.loan .prog i { display: block; height: 100%; background: linear-gradient(90deg, var(--teal), var(--ok)); transition: width 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.loan .st { font-family: var(--mono); font-size: 11px; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--line-2); color: var(--muted); white-space: nowrap; }
+.loan .st.settled { color: var(--ok); border-color: rgba(91, 228, 155, 0.5); }
+.loan .st.late { color: var(--bad); border-color: rgba(255, 107, 107, 0.5); }
+
+/* demos in narrow tiles (phones, and tablets showing two tiles a row) */
+@container (max-width: 400px) {
+  .qr-wrap { justify-content: center; }
+  .qr-side { flex-basis: 100%; }
+  .habits { grid-template-columns: 72px repeat(7, minmax(0, 1fr)) 32px; gap: 4px; }
+  .loan { grid-template-columns: minmax(0, 1fr) auto; }
+  .loan .who { grid-column: 1; grid-row: 1; }
+  .loan .st { grid-column: 2; grid-row: 1; align-self: start; }
+  .loan .prog { grid-column: 1 / -1; grid-row: 2; }
+  .counter strong { font-size: 38px; }
+}
+
+/* toolkit */
+.kit { display: grid; gap: 14px; }
+.kit h4 { margin: 0 0 7px; font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chips span { font-size: 13px; padding: 5px 11px; border-radius: 999px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--line); }
+
+/* ---------- experience ---------- */
+.xp-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr); gap: clamp(32px, 5vw, 72px); align-items: start; }
+.xp-intro { position: sticky; top: 110px; }
+.xp-intro p { margin-top: 20px; color: var(--muted); max-width: 44ch; font-size: 16.5px; }
+.roles { display: grid; gap: 12px; }
+.role { border-radius: 18px; padding: 20px 22px; }
+.role-top { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; gap: 4px 14px; }
+@media (max-width: 480px) { .role-top { grid-template-columns: minmax(0, 1fr); } }
+.role h3 { font-size: 19px; font-weight: 600; letter-spacing: -0.025em; }
+.role time { font-family: var(--mono); font-size: 12px; color: var(--faint); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.role time.current { color: var(--ok); }
+.role .org { margin-top: 2px; font-size: 13.5px; color: var(--faint); }
+.role p { margin-top: 10px; color: var(--muted); font-size: 15px; }
+@media (max-width: 900px) { .xp-grid { grid-template-columns: minmax(0, 1fr); } .xp-intro { position: static; } }
+
+/* ---------- contact ---------- */
+.contact { padding-block: clamp(84px, 11vw, 140px) 40px; }
+.cta-card { border-radius: clamp(22px, 4vw, 32px); padding: clamp(22px, 6vw, 72px); }
+.mail { display: inline-block; margin-top: 26px; font-size: clamp(22px, 6.4vw, 70px); font-weight: 600; letter-spacing: -0.05em; line-height: 1.05; text-decoration: none; overflow-wrap: anywhere; color: var(--fg); transition: color 0.2s; }
+.mail:hover { color: var(--accent); }
+.phone { display: block; width: max-content; max-width: 100%; margin-top: 10px; font-size: clamp(20px, 2.6vw, 32px); font-weight: 500; letter-spacing: -0.03em; color: var(--muted); text-decoration: none; font-variant-numeric: tabular-nums; transition: color 0.2s; }
+.phone:hover { color: var(--fg); }
+.cta-row { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 10px; }
+.cta-meta { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 8px 24px; font-family: var(--mono); font-size: 12.5px; color: var(--faint); }
+
+footer { margin-top: 40px; padding-block: 26px 40px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 10px 20px; flex-wrap: wrap; font-family: var(--mono); font-size: 12px; color: var(--faint); }
+
+/* ---------- command menu ---------- */
+#cmdk {
+  padding: 0; margin: 14vh auto auto; width: min(560px, calc(100% - 32px)); border-radius: 20px; color: var(--fg);
+  background: rgba(16, 18, 26, 0.78); -webkit-backdrop-filter: blur(30px) saturate(170%); backdrop-filter: blur(30px) saturate(170%);
+  border: 1px solid var(--line-2); box-shadow: 0 40px 120px -20px rgba(0, 0, 0, 0.85);
+}
+#cmdk::backdrop { background: rgba(3, 4, 8, 0.55); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+#cmdk input { width: 100%; border: 0; border-bottom: 1px solid var(--line); background: transparent; color: var(--fg); font: 16px var(--sans); padding: 18px 20px; outline: none; }
+#cmdk input::placeholder { color: var(--faint); }
+#cmdk ul { list-style: none; margin: 0; padding: 8px; max-height: 52vh; overflow: auto; }
+.cmd { display: flex; justify-content: space-between; align-items: center; gap: 12px; width: 100%; padding: 11px 12px; border-radius: 11px; border: 0; background: none; color: var(--fg); font: 14.5px var(--sans); text-align: left; text-decoration: none; cursor: pointer; }
+.cmd small { min-width: 0; color: var(--faint); font-family: var(--mono); font-size: 11.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cmd.on { background: rgba(255, 255, 255, 0.08); }
+#cmdk .empty { padding: 14px 12px; color: var(--faint); font-size: 14px; }
+.cmdk-foot { display: flex; gap: 14px; flex-wrap: wrap; padding: 10px 16px; border-top: 1px solid var(--line); font-family: var(--mono); font-size: 11px; color: var(--faint); }
+
+.nav svg { width: 16px; height: 16px; }
+.cmdk-foot button { margin-left: auto; font-family: var(--mono); font-size: 11px; color: var(--muted); background: none; border: 1px solid var(--line-2); border-radius: 6px; padding: 3px 8px; cursor: pointer; }
+
+/* touch screens: bigger targets, no keyboard hints */
+@media (pointer: coarse) {
+  .sbtn { padding: 10px 14px; }
+  .nav a, .nav button { padding: 10px 12px; }
+  .kbd-mod, .cmdk-keys { display: none; }
+  .card::before, .card::after { display: none; }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .card, .role { animation: lift linear both; animation-timeline: view(); animation-range: entry 0% entry 32%; }
+  }
+}
+@keyframes lift { from { transform: translateY(30px) scale(0.985); } to { transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .rise, .strip-track, .status .dot { animation: none; }
+  .bar .fill, .loan .prog i { transition: none; }
+  .idcard.scanning::after { display: none; }
+}
+</style>
+</head>
+<body>
+<!-- body -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="flame" viewBox="0 0 22 26"><path d="M11 0c1 5 6 7.6 6 14.4A6.6 6.6 0 0 1 11 21a6.6 6.6 0 0 1-6-6.6c0-3 1.6-4.8 3-6.4.3 2 1.2 3.4 2.4 3.6C9.6 8.4 10.2 4.4 11 0Z"/></symbol>
+  <symbol id="search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.5-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+<canvas id="bg" aria-hidden="true"></canvas>
+
+<nav class="nav glass" aria-label="Main">
+  <a class="mark" href="#top">O<span>p</span>.</a>
+  <a href="#work">Work</a>
+  <a href="#experience">Experience</a>
+  <a class="hide-sm" href="#contact">Contact</a>
+  <button type="button" data-cmdk aria-label="Open command menu"><svg aria-hidden="true"><use href="#search"/></svg><kbd class="kbd-mod">⌘K</kbd></button>
+</nav>
+
+<header class="hero wrap" id="top">
+  <div class="inner hero-grid">
+    <div>
+      <a class="status glass rise" href="#contact"><span class="dot"></span>Open to new projects</a>
+      <h1 class="rise d1" aria-label="Omowole Precious"><span>Omowole</span><span class="l2">Precious</span></h1>
+      <p class="lead rise d2">Full-stack developer at the <strong>Lagos State Internal Revenue Service</strong>. I design and ship data pipelines, ID verification and internal tools, plus web and Android apps of my own.</p>
+      <div class="cta rise d3">
+        <a class="btn primary" href="#work">See the work <svg aria-hidden="true"><use href="#arrow"/></svg></a>
+        <button class="btn" type="button" data-cmdk>Command menu <kbd class="kbd-mod">⌘K</kbd></button>
+      </div>
+    </div>
+    <aside class="now glass rise d4" aria-label="Right now">
+      <div class="now-head eyebrow"><span><span class="dot"></span>Now</span><span id="clock">Lagos</span></div>
+      <div>
+        <div class="now-role">Revenue Supervisor</div>
+        <div class="now-org">Lagos State Internal Revenue Service</div>
+      </div>
+      <dl class="kpis">
+        <div><dt>3+</dt><dd>years at LIRS</dd></div>
+        <div><dt>6</dt><dd>systems built</dd></div>
+        <div><dt>1,000+</dt><dd>taxpayer profiles automated</dd></div>
+        <div><dt>350+</dt><dd>commits on Habit Ledger</dd></div>
+      </dl>
+      <div class="now-foot"><span>Lagos, Nigeria</span><span>6.52°N 3.37°E</span></div>
+    </aside>
+  </div>
+</header>
+
+<div class="strip" aria-label="Tools">
+  <div class="strip-mask">
+    <div class="strip-track">
+      <span>Go</span><span>Rust</span><span>TypeScript</span><span>Python</span><span>React</span><span>Next.js</span><span>React Native</span><span>Expo</span><span>FastAPI</span><span>Redis</span><span>MySQL</span><span>Tailwind CSS</span><span>PHP</span><span>Firebase</span><span>Vercel</span>
+      <span aria-hidden="true">Go</span><span aria-hidden="true">Rust</span><span aria-hidden="true">TypeScript</span><span aria-hidden="true">Python</span><span aria-hidden="true">React</span><span aria-hidden="true">Next.js</span><span aria-hidden="true">React Native</span><span aria-hidden="true">Expo</span><span aria-hidden="true">FastAPI</span><span aria-hidden="true">Redis</span><span aria-hidden="true">MySQL</span><span aria-hidden="true">Tailwind CSS</span><span aria-hidden="true">PHP</span><span aria-hidden="true">Firebase</span><span aria-hidden="true">Vercel</span>
+    </div>
+  </div>
+</div>
+
+<main>
+  <section class="sec wrap" id="work">
+    <div class="inner">
+      <div class="sec-head">
+        <div>
+          <div class="eyebrow">Selected work</div>
+          <h2>Six systems, designed and <em>built</em> end to end.</h2>
+        </div>
+        <p class="sec-note">Every tile runs a small live demo. Press the buttons. LIRS systems are internal, so the demos use sample data.</p>
+      </div>
+
+      <div class="bento">
+        <!-- FDMP -->
+        <article class="card glass s7">
+          <div>
+            <div class="tags"><span class="tag lirs">LIRS · internal</span><span class="tag">2026</span></div>
+            <h3 style="margin-top:14px">Financial Data Management Portal</h3>
+            <p class="desc">Financial institutions file monthly transaction data with LIRS. Every row is checked before anything is kept.</p>
+          </div>
+          <div class="demo">
+            <div class="demo-head"><span><span class="dot"></span>Upload pipeline</span><span>Simulation</span></div>
+            <canvas id="pipe" aria-label="Animated pipeline: uploads pass quarantine and validation, then are stored or rejected"></canvas>
+            <div class="demo-foot"><span>Stored <b class="ok" id="pipe-ok">0</b> · Rejected <b class="bad" id="pipe-bad">0</b></span><button class="sbtn go" id="pipe-batch" type="button">Upload a batch</button></div>
+          </div>
+          <details><summary>How it works</summary><p>A Go API hands each upload to a Rust worker over a Redis queue. Files sit in quarantine in S3-compatible storage until every row passes a versioned template. Clean files become permanent records; failed ones come back with an error report naming the row and column. Role-based access for institutions, admins and analysts, one-time passwords, a full audit log and FX-currency analytics.</p></details>
+          <div class="stack">Go · Rust · Redis · MySQL · S3/MinIO · React · TypeScript</div>
+        </article>
+
+        <!-- QR -->
+        <article class="card glass s5">
+          <div>
+            <div class="tags"><span class="tag lirs">LIRS · internal</span><span class="tag">2026</span></div>
+            <h3 style="margin-top:14px">Staff ID QR Verification</h3>
+            <p class="desc">Scan a staff ID and the live record comes up. Forged or revoked cards fail on the spot.</p>
+          </div>
+          <div class="demo">
+            <div class="demo-head"><span><span class="dot"></span>Verify a card</span><span>Sample</span></div>
+            <div class="qr-wrap">
+              <div class="idcard" id="idcard">
+                <div class="org">LIRS · Staff ID</div>
+                <div class="person"><div class="avatar">AO</div><div><div class="nm">Adaeze Okafor</div><div class="rl">Tax Officer II</div></div></div>
+                <canvas id="qr" aria-label="Sample QR pattern"></canvas>
+                <div class="sid">LIRS/04127</div>
+              </div>
+              <div class="qr-side">
+                <div class="row">
+                  <button class="sbtn go" id="qr-scan" type="button">Scan</button>
+                  <button class="sbtn" id="qr-forge" type="button">Scan a forgery</button>
+                  <button class="sbtn" id="qr-revoke" type="button" aria-pressed="false">Revoke</button>
+                </div>
+                <div class="result" id="qr-result" aria-live="polite">Scan the card to check it against the live record.</div>
+                <ul class="log" id="qr-log" aria-label="Scan log"></ul>
+              </div>
+            </div>
+          </div>
+          <details><summary>How it works</summary><p>Each QR code holds a signed token, not the person's details, so a photo can change or a card can be revoked without reprinting anything. Every scan, valid or not, is written to an audit log. Admins manage staff, photos and bulk CSV imports from a password-protected console, and it runs fully in-house with no paid services.</p></details>
+          <div class="stack">Python · FastAPI · SQLAlchemy · SQLite · Jinja2 · Tailwind</div>
+        </article>
+
+        <!-- Asset register -->
+        <article class="card glass">
+          <div>
+            <div class="tags"><span class="tag lirs">LIRS · internal</span><span class="tag">2026</span></div>
+            <h3 style="margin-top:14px">IT Asset Register</h3>
+            <p class="desc">Every machine in the directorate: what it is, who holds it and when it's due for replacement.</p>
+          </div>
+          <div class="demo">
+            <div class="demo-head"><span><span class="dot"></span>Life-cycle report</span><span>Illustrative</span></div>
+            <div class="row" role="group" aria-label="Asset type">
+              <button class="sbtn" type="button" data-type="laptops" aria-pressed="true">Laptops</button>
+              <button class="sbtn" type="button" data-type="desktops" aria-pressed="false">Desktops</button>
+              <button class="sbtn" type="button" data-type="printers" aria-pressed="false">Printers</button>
+            </div>
+            <div class="bars" id="bars"></div>
+            <div class="demo-foot"><span><b id="due">0</b> due for replacement</span></div>
+          </div>
+          <details><summary>How it works</summary><p>Nine built-in reports: an executive summary, inventory by type, location and subunit, a life-cycle replacement forecast, tagging and data-quality checks, custodian statements, a pivot table and a full listing, all exportable. Bulk CSV import from templates, admin-managed accounts with one-time passwords, and a full audit trail.</p></details>
+          <div class="stack">PHP · MySQL · JavaScript · Apache</div>
+        </article>
+
+        <!-- eTax -->
+        <article class="card glass">
+          <div>
+            <div class="tags"><span class="tag lirs">LIRS · internal</span><span class="tag">2026</span></div>
+            <h3 style="margin-top:14px">eTax Bulk Automation</h3>
+            <p class="desc">Concurrent Python workers on the eTax API, across 1,000+ taxpayer profiles.</p>
+          </div>
+          <div class="demo">
+            <div class="demo-head"><span><span class="dot"></span>Profile update run</span><span>Simulation</span></div>
+            <div class="counter"><strong id="tax-count">0</strong><span>of 1,275 · <span id="tax-rate">idle</span></span></div>
+            <div class="lanes" id="lanes"></div>
+            <div class="row"><button class="sbtn" id="tax-1" type="button">1 worker</button><button class="sbtn go" id="tax-30" type="button">30 workers</button></div>
+          </div>
+          <details><summary>How it works</summary><p>Python tools that file annual returns, generate Tax Clearance Certificates, update taxpayer profiles and export TAMA requests through the eTax API, running many records in parallel with a thread pool instead of one at a time.</p></details>
+          <div class="stack">Python · requests · ThreadPoolExecutor · CSV</div>
+        </article>
+
+        <!-- Habit Ledger -->
+        <article class="card glass">
+          <div>
+            <div class="tags"><a class="tag live" href="https://habit-ledger-two.vercel.app" target="_blank" rel="noopener">Live ↗</a><span class="tag">Web &amp; Android</span></div>
+            <h3 style="margin-top:14px">Habit Ledger</h3>
+            <p class="desc">A habit tracker that keeps your data on your device. 350+ commits across web and mobile.</p>
+          </div>
+          <div class="demo">
+            <div class="demo-head"><span><span class="dot"></span>This week</span><span>Tap a day</span></div>
+            <div class="habits" id="habits"></div>
+            <div class="demo-foot"><span><b id="habit-rate">0%</b> of days done</span></div>
+          </div>
+          <details><summary>How it works</summary><p>A Next.js web app on Vercel and a React Native (Expo) Android app. Optional Google Drive backup over OAuth, push reminders, Paystack payments, and trend insights written by AI from a chain of ten providers, each checked so every number matches your real stats, with a rule-based fallback that never fails.</p></details>
+          <div class="stack">Next.js · React Native · Expo · TypeScript · Firebase</div>
+        </article>
+
+        <!-- LoanBook -->
+        <article class="card glass s7">
+          <div>
+            <div class="tags"><a class="tag live" href="https://mpomowole.github.io/loanbook/" target="_blank" rel="noopener">Live ↗</a><span class="tag">Client project</span><span class="tag">2026</span></div>
+            <h3 style="margin-top:14px">LoanBook</h3>
+            <p class="desc">A loan ledger for a lending business, kept in each user's own Google Drive. No server holds anyone's records.</p>
+          </div>
+          <div class="demo">
+            <div class="demo-head"><span><span class="dot"></span>Loan book</span><span>Sample data</span></div>
+            <div class="ledger" id="ledger"></div>
+            <div class="demo-foot"><span>Outstanding <b id="outstanding">₦0</b></span><button class="sbtn go" id="repay" type="button">Record ₦25,000</button></div>
+          </div>
+          <details><summary>How it works</summary><p>Users sign in with Google and the book lives in their own Drive. Imports from Excel, Google Sheets or CSV, Chart.js dashboards, and opt-in repayment reminders emailed by a Google Apps Script service that verifies each sign-in token. Covered by an automated test suite.</p></details>
+          <div class="stack">JavaScript · Google Drive API · Google Identity · Apps Script · Chart.js</div>
+        </article>
+
+        <!-- Toolkit -->
+        <article class="card glass s5 full-t">
+          <div>
+            <div class="tags"><span class="tag">Toolkit</span></div>
+            <h3 style="margin-top:14px">What I build with</h3>
+          </div>
+          <div class="kit">
+            <div><h4>Languages</h4><div class="chips"><span>TypeScript</span><span>JavaScript</span><span>Python</span><span>Go</span><span>Rust</span><span>PHP</span><span>SQL</span></div></div>
+            <div><h4>Frameworks</h4><div class="chips"><span>React</span><span>Next.js</span><span>React Native</span><span>Expo</span><span>FastAPI</span><span>Tailwind CSS</span></div></div>
+            <div><h4>Data &amp; cloud</h4><div class="chips"><span>MySQL</span><span>Redis</span><span>SQLite</span><span>S3 / MinIO</span><span>Firebase</span><span>Vercel</span><span>Google Cloud</span></div></div>
+            <div><h4>Infrastructure</h4><div class="chips"><span>Networking</span><span>Hardware</span><span>Helpdesk</span><span>Access management</span></div></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec wrap" id="experience">
+    <div class="inner xp-grid">
+      <div class="xp-intro">
+        <div class="eyebrow">Experience</div>
+        <h2>Three roles, <em>one</em> institution.</h2>
+        <p>I joined the Lagos State Internal Revenue Service as an IT intern in 2021, wiring networks across tax stations. Today I'm a Revenue Supervisor who also writes the software: a Go and Rust pipeline for financial data, QR verification for every staff ID, and Python that runs eTax jobs across a thousand-plus taxpayer profiles at once.</p>
+      </div>
+      <div class="roles">
+        <div class="role glass">
+          <div class="role-top"><h3>Revenue Supervisor</h3><time class="current">Mar 2026 – now</time></div>
+          <div class="org">LIRS · Full-time staff</div>
+          <p>Built the Financial Data Management Portal, the IT Asset Register and Staff ID QR Verification. Automating bulk eTax work in Python.</p>
+        </div>
+        <div class="role glass">
+          <div class="role-top"><h3>IT Administrator / Software Developer</h3><time>Oct 2023 – Feb 2026</time></div>
+          <div class="org">LIRS · Contract &amp; NYSC</div>
+          <p>Streamlined annual-returns processing and taxpayer identity records. Prototyped and helped deploy the File Monitoring &amp; Tracking System. Ran domain networking and led Tier-1 hardware and helpdesk support.</p>
+        </div>
+        <div class="role glass">
+          <div class="role-top"><h3>IT Intern</h3><time>Jun – Oct 2021</time></div>
+          <div class="org">LIRS</div>
+          <p>PHP, JavaScript and Python on internal projects; configured domain networks across tax stations.</p>
+        </div>
+        <div class="role glass">
+          <div class="role-top"><h3>B.Sc. Computer Science</h3><time>2022</time></div>
+          <div class="org">West African Union University, Cotonou</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact wrap" id="contact">
+    <div class="inner">
+      <div class="cta-card glass">
+        <div class="eyebrow">Contact</div>
+        <h2>Have something that needs to be <em>fast?</em></h2>
+        <a class="mail" id="email" href="mailto:mpomowole@gmail.com">mpomowole@gmail.com</a>
+        <a class="phone" id="phone" href="tel:+2348124786454">+234 812 478 6454</a>
+        <div class="cta-row">
+          <button class="btn primary" id="copy" type="button">Copy email</button>
+          <a class="btn" href="https://wa.me/2348124786454" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="btn" href="Omowole_Precious_CV.pdf" target="_blank" rel="noopener">Download CV <svg aria-hidden="true"><use href="#arrow"/></svg></a>
+        </div>
+        <div class="cta-meta"><span>Lagos, Nigeria</span><span id="clock2">WAT</span><span>Full-stack, backend and mobile work</span></div>
+      </div>
+      <footer>
+        <span id="loadtime">One hand-written HTML file. No framework, no trackers.</span>
+        <span>© 2026 Omowole Precious Michael</span>
+      </footer>
+    </div>
+  </section>
+</main>
+
+<dialog id="cmdk" aria-label="Command menu">
+  <input id="cmdk-q" type="text" placeholder="Type a command or search…" autocomplete="off" spellcheck="false" aria-label="Search commands">
+  <ul id="cmdk-list" role="listbox"></ul>
+  <div class="cmdk-foot"><span class="cmdk-keys">↑↓ to move · Enter to run · Esc to close</span><button type="button" id="cmdk-close">Close</button></div>
+</dialog>
+
+<script>
+(() => {
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const fmt = new Intl.NumberFormat("en-NG");
+  const naira = new Intl.NumberFormat("en-NG", { style: "currency", currency: "NGN", maximumFractionDigits: 0, minimumFractionDigits: 0 });
+  const lagosClock = new Intl.DateTimeFormat("en-GB", { timeZone: "Africa/Lagos", hour: "2-digit", minute: "2-digit", hour12: false });
+  const lagosStamp = new Intl.DateTimeFormat("en-GB", { timeZone: "Africa/Lagos", hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false });
+  const isMac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
+  if (!isMac) $$(".kbd-mod").forEach((k) => (k.textContent = "Ctrl K"));
+
+  /* ---------- one frame loop, running only while something visible needs it ---------- */
+  const loops = new Set();
+  let raf = 0, last = 0;
+  function frame(now) {
+    const dt = Math.min(50, last ? now - last : 16);
+    last = now;
+    let any = false;
+    for (const l of loops) if (l.visible && l.active()) { l.tick(dt, now); any = true; }
+    if (any && !document.hidden) raf = requestAnimationFrame(frame);
+    else { raf = 0; last = 0; }
+  }
+  function wake() { if (!raf && !document.hidden) raf = requestAnimationFrame(frame); }
+  document.addEventListener("visibilitychange", wake);
+  const io = new IntersectionObserver((es) => {
+    for (const e of es) if (e.target.__loop) e.target.__loop.visible = e.isIntersecting;
+    wake();
+  }, { rootMargin: "120px" });
+  function addLoop(el, loop) {
+    loop.visible = false;
+    loop.active = loop.active || (() => true);
+    el.__loop = loop;
+    loops.add(loop);
+    io.observe(el);
+  }
+  function fit(c) {
+    const d = Math.min(2, window.devicePixelRatio || 1), r = c.getBoundingClientRect();
+    const w = Math.max(1, Math.round(r.width * d)), h = Math.max(1, Math.round(r.height * d));
+    if (c.width !== w || c.height !== h) { c.width = w; c.height = h; }
+    return { w, h, d };
+  }
+  function rrect(g, x, y, w, h, r) { g.beginPath(); if (g.roundRect) g.roundRect(x, y, w, h, r); else g.rect(x, y, w, h); }
+
+  /* ---------- clocks ---------- */
+  function tickClock() {
+    const t = lagosClock.format(new Date());
+    $("#clock").textContent = `Lagos ${t}`;
+    $("#clock2").textContent = `${t} WAT`;
+  }
+  tickClock();
+  setInterval(tickClock, 20000);
+
+  /* ---------- aurora background (WebGL) ---------- */
+  (() => {
+    const c = $("#bg");
+    const gl = c.getContext("webgl", { antialias: false, alpha: false, depth: false, powerPreference: "low-power" });
+    const fail = () => { c.remove(); document.documentElement.classList.add("no-gl"); };
+    if (!gl) return fail();
+    const vs = "attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}";
+    const fs = `precision mediump float;
+uniform vec2 r;uniform float t;uniform vec2 m;uniform float s;
+float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);
+return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}
+float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<5;i++){v+=a*n(p);p=p*2.03+vec2(1.7,9.2);a*=.5;}return v;}
+void main(){
+  vec2 uv=gl_FragCoord.xy/r;
+  vec2 p=(gl_FragCoord.xy-.5*r)/r.y;
+  float T=t*.045;
+  vec2 q=vec2(fbm(p*1.3+vec2(0.,T)),fbm(p*1.3+vec2(5.2,1.3)-T));
+  vec2 w=vec2(fbm(p*1.15+2.2*q+vec2(1.7,9.2)+T*1.2),fbm(p*1.15+2.2*q+vec2(8.3,2.8)-T*.8));
+  float f=fbm(p*1.05+2.6*w);
+  vec3 col=vec3(.018,.022,.034);
+  col=mix(col,vec3(.13,.2,.72),smoothstep(.36,.88,f)*.9);
+  col=mix(col,vec3(.03,.5,.54),smoothstep(.42,.92,w.y)*.75);
+  col+=vec3(.95,.42,.2)*.3*pow(smoothstep(.48,1.,f*q.x*1.7),3.);
+  float md=length(p-m);
+  col+=vec3(.36,.45,.95)*.16*exp(-md*md*4.);
+  col*=mix(.45,1.,smoothstep(.0,.85,uv.y));
+  col*=mix(1.,.5,s);
+  col*=1.-.32*dot(uv-.5,uv-.5)*2.;
+  col+=(h(gl_FragCoord.xy+fract(t)*91.)-.5)*.03;
+  gl_FragColor=vec4(col,1.);
+}`;
+    const sh = (type, src) => { const x = gl.createShader(type); gl.shaderSource(x, src); gl.compileShader(x); if (!gl.getShaderParameter(x, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(x)); return x; };
+    let prog;
+    try {
+      prog = gl.createProgram();
+      gl.attachShader(prog, sh(gl.VERTEX_SHADER, vs));
+      gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, fs));
+      gl.linkProgram(prog);
+      if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) throw new Error("link");
+    } catch (e) { return fail(); }
+    gl.useProgram(prog);
+    gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+    const loc = gl.getAttribLocation(prog, "a");
+    gl.enableVertexAttribArray(loc);
+    gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+    const uR = gl.getUniformLocation(prog, "r"), uT = gl.getUniformLocation(prog, "t"), uM = gl.getUniformLocation(prog, "m"), uS = gl.getUniformLocation(prog, "s");
+    const SCALE = 0.5;
+    let mx = 0.35, my = 0.25, tx = mx, ty = my, drawn = false;
+    const t0 = performance.now();
+    function size() {
+      const w = Math.max(1, Math.round(innerWidth * SCALE)), h = Math.max(1, Math.round(innerHeight * SCALE));
+      if (c.width !== w || c.height !== h) { c.width = w; c.height = h; gl.viewport(0, 0, w, h); }
+      drawn = false;
+    }
+    size();
+    addEventListener("resize", () => { size(); wake(); });
+    addEventListener("scroll", () => { drawn = false; wake(); }, { passive: true });
+    addEventListener("pointermove", (e) => {
+      tx = (e.clientX - innerWidth / 2) / innerHeight;
+      ty = -(e.clientY - innerHeight / 2) / innerHeight;
+      wake();
+    }, { passive: true });
+    loops.add({
+      visible: true,
+      active: () => !reduce || !drawn,
+      tick(dt, now) {
+        mx += (tx - mx) * 0.05; my += (ty - my) * 0.05;
+        gl.uniform2f(uR, c.width, c.height);
+        gl.uniform1f(uT, reduce ? 24 : (now - t0) / 1000);
+        gl.uniform2f(uM, mx, my);
+        gl.uniform1f(uS, Math.min(1, scrollY / (innerHeight * 1.1)));
+        gl.drawArrays(gl.TRIANGLES, 0, 3);
+        drawn = true;
+      },
+    });
+    wake();
+  })();
+
+  /* ---------- spotlight borders on cards ---------- */
+  $$(".card").forEach((card) => card.addEventListener("pointermove", (e) => {
+    const r = card.getBoundingClientRect();
+    card.style.setProperty("--mx", `${e.clientX - r.left}px`);
+    card.style.setProperty("--my", `${e.clientY - r.top}px`);
+  }));
+
+  /* ---------- pipeline ---------- */
+  (() => {
+    const c = $("#pipe"), g = c.getContext("2d"), okEl = $("#pipe-ok"), badEl = $("#pipe-bad");
+    const names = { up: "upload", q: "quarantine", v: "validate", s: "stored", r: "rejected" };
+    let parts = [], spawnIn = 250, ok = 0, bad = 0;
+    const spawn = () => parts.push({ seg: 0, t: 0, wait: 0, good: Math.random() > 0.17, sp: 0.75 + Math.random() * 0.5 });
+    addLoop(c, {
+      tick(dt) {
+        const { w, h, d } = fit(c);
+        const narrow = w / d < 380;
+        g.font = `500 ${(narrow ? 10 : 11) * d}px "Geist Mono", ui-monospace, monospace`;
+        const tw = (k) => g.measureText(names[k]).width + 18 * d;
+        const P = {
+          up: [Math.max(0.08 * w, tw("up") / 2 + 3 * d), h * 0.5],
+          q: [(narrow ? 0.38 : 0.36) * w, h * 0.5],
+          v: [(narrow ? 0.645 : 0.62) * w, h * 0.5],
+          s: [Math.min(0.9 * w, w - tw("s") / 2 - 4 * d), h * 0.2],
+          r: [Math.min(0.9 * w, w - tw("r") / 2 - 4 * d), h * 0.8],
+        };
+        if (!reduce) { spawnIn -= dt; if (spawnIn <= 0) { spawn(); spawnIn = 460 + Math.random() * 520; } }
+        g.clearRect(0, 0, w, h);
+        g.lineWidth = 1.2 * d;
+        g.strokeStyle = "rgba(255,255,255,.12)";
+        g.setLineDash([3 * d, 4 * d]);
+        for (const [a, b] of [["up", "q"], ["q", "v"], ["v", "s"], ["v", "r"]]) { g.beginPath(); g.moveTo(P[a][0], P[a][1]); g.lineTo(P[b][0], P[b][1]); g.stroke(); }
+        g.setLineDash([]);
+        let waiting = 0;
+        for (const p of parts) {
+          const route = ["up", "q", "v", p.good ? "s" : "r"];
+          if (p.wait > 0) { p.wait -= dt; waiting++; continue; }
+          p.t += (dt / 1000) * p.sp * 1.5;
+          if (p.t >= 1) {
+            p.t = 0; p.seg++;
+            if (p.seg === 1) { p.wait = 420; waiting++; continue; }
+            if (p.seg === 3) { p.done = true; p.good ? ok++ : bad++; continue; }
+          }
+          const [x0, y0] = P[route[p.seg]], [x1, y1] = P[route[p.seg + 1]];
+          const x = x0 + (x1 - x0) * p.t, y = y0 + (y1 - y0) * p.t;
+          const col = p.seg >= 2 ? (p.good ? "#5BE49B" : "#FF6B6B") : "#8EA8FF";
+          g.shadowColor = col; g.shadowBlur = 12 * d;
+          g.fillStyle = col;
+          rrect(g, x - 4.5 * d, y - 6 * d, 9 * d, 12 * d, 2 * d);
+          g.fill();
+          g.shadowBlur = 0;
+        }
+        parts = parts.filter((p) => !p.done);
+        okEl.textContent = fmt.format(ok);
+        badEl.textContent = fmt.format(bad);
+        g.textAlign = "center"; g.textBaseline = "middle";
+        for (const k in names) {
+          const [x, y] = P[k];
+          const label = k === "q" && waiting && !narrow ? `quarantine · ${waiting}` : names[k];
+          const lw = g.measureText(label).width + 18 * d;
+          g.fillStyle = "rgba(14,16,24,.96)";
+          g.strokeStyle = k === "s" ? "rgba(91,228,155,.6)" : k === "r" ? "rgba(255,107,107,.6)" : k === "q" && waiting ? "rgba(142,168,255,.75)" : "rgba(255,255,255,.16)";
+          g.lineWidth = d;
+          rrect(g, x - lw / 2, y - 12 * d, lw, 24 * d, 12 * d);
+          g.fill(); g.stroke();
+          g.fillStyle = "#F3F5F9";
+          g.fillText(label, x, y + 0.5 * d);
+        }
+      },
+    });
+    $("#pipe-batch").addEventListener("click", () => { for (let i = 0; i < 16; i++) setTimeout(() => { spawn(); wake(); }, i * 60); });
+  })();
+
+  /* ---------- QR verification ---------- */
+  (() => {
+    const c = $("#qr"), card = $("#idcard"), res = $("#qr-result"), log = $("#qr-log"), revokeBtn = $("#qr-revoke");
+    let revoked = false;
+    (function drawQR() {
+      const g = c.getContext("2d"), n = 25, m = 4;
+      c.width = n * m; c.height = n * m;
+      g.fillStyle = "#F3F5F9"; g.fillRect(0, 0, c.width, c.height);
+      let seed = 4127;
+      const rnd = () => (seed = (seed * 48271) % 2147483647) / 2147483647;
+      const finder = (x, y) => (x < 8 && y < 8) || (x > n - 9 && y < 8) || (x < 8 && y > n - 9);
+      g.fillStyle = "#0A0C12";
+      for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) {
+        if (finder(x, y)) continue;
+        if (((x === 6 || y === 6) && (x + y) % 2 === 0) || rnd() < 0.47) g.fillRect(x * m, y * m, m, m);
+      }
+      for (const [fx, fy] of [[0, 0], [n - 7, 0], [0, n - 7]]) {
+        g.fillStyle = "#0A0C12"; g.fillRect(fx * m, fy * m, 7 * m, 7 * m);
+        g.fillStyle = "#F3F5F9"; g.fillRect((fx + 1) * m, (fy + 1) * m, 5 * m, 5 * m);
+        g.fillStyle = "#0A0C12"; g.fillRect((fx + 2) * m, (fy + 2) * m, 3 * m, 3 * m);
+      }
+    })();
+    function addLog(text, cls) {
+      const li = document.createElement("li");
+      li.innerHTML = `${lagosStamp.format(new Date())} · <span class="${cls}">${text}</span>`;
+      log.prepend(li);
+      while (log.children.length > 3) log.lastChild.remove();
+    }
+    function scan(forged) {
+      card.classList.remove("scanning"); void card.offsetWidth; card.classList.add("scanning");
+      res.className = "result";
+      res.textContent = "Checking signature…";
+      setTimeout(() => {
+        if (forged) {
+          res.className = "result bad";
+          res.innerHTML = "<strong>Verification failed</strong>Signature doesn't match. Not a genuine card.";
+          addLog("rejected · bad signature", "bad");
+        } else if (revoked) {
+          res.className = "result bad";
+          res.innerHTML = "<strong>Verification failed</strong>LIRS/04127 is revoked.";
+          addLog("rejected · revoked", "bad");
+        } else {
+          res.className = "result ok";
+          res.innerHTML = "<strong>Verified</strong>Adaeze Okafor · Tax Officer II";
+          addLog("verified", "ok");
+        }
+      }, reduce ? 0 : 600);
+    }
+    $("#qr-scan").addEventListener("click", () => scan(false));
+    $("#qr-forge").addEventListener("click", () => scan(true));
+    revokeBtn.addEventListener("click", () => {
+      revoked = !revoked;
+      revokeBtn.setAttribute("aria-pressed", String(revoked));
+      revokeBtn.textContent = revoked ? "Reinstate" : "Revoke";
+      card.classList.toggle("revoked", revoked);
+      addLog(revoked ? "admin revoked card" : "admin reinstated card", revoked ? "bad" : "ok");
+    });
+  })();
+
+  /* ---------- asset life-cycle bars ---------- */
+  (() => {
+    const bands = ["< 1 yr", "1–2 yrs", "2–3 yrs", "3–4 yrs", "4–6 yrs", "6+ yrs"];
+    const data = { laptops: [42, 61, 38, 27, 19, 11], desktops: [18, 25, 44, 52, 36, 29], printers: [6, 9, 14, 11, 8, 7] };
+    const host = $("#bars"), dueEl = $("#due"), tabs = $$("[data-type]");
+    host.innerHTML = bands.map((b, i) => `<div class="bar${i >= 4 ? " due" : ""}"><span>${b}</span><div class="tr"><div class="fill"></div></div><span class="n">0</span></div>`).join("");
+    const rows = [...host.children];
+    function show(type) {
+      const v = data[type], max = Math.max(...v);
+      rows.forEach((row, i) => { row.querySelector(".fill").style.width = `${(v[i] / max) * 100}%`; row.querySelector(".n").textContent = v[i]; });
+      dueEl.textContent = v[4] + v[5];
+      tabs.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.type === type)));
+    }
+    tabs.forEach((b) => b.addEventListener("click", () => show(b.dataset.type)));
+    requestAnimationFrame(() => show("laptops"));
+  })();
+
+  /* ---------- eTax concurrent workers ---------- */
+  (() => {
+    const TOTAL = 1275, LANES = 30;
+    const host = $("#lanes"), countEl = $("#tax-count"), rateEl = $("#tax-rate");
+    host.innerHTML = Array.from({ length: LANES }, () => '<div class="lane"><i></i></div>').join("");
+    const laneEls = [...host.children], fills = laneEls.map((l) => l.firstChild);
+    let lanes = [], running = false, done = 0, started = 0, elapsed = 0, autoRan = false;
+    const dur = () => 45 + Math.random() * 60;
+    function start(k) {
+      done = 0; elapsed = 0; started = k; running = true;
+      lanes = laneEls.map((_, i) => ({ busy: i < k, t: 0, d: dur() }));
+      laneEls.forEach((el, i) => el.classList.toggle("busy", i < k));
+      fills.forEach((f) => (f.style.transform = "scaleX(0)"));
+      wake();
+    }
+    addLoop(host, {
+      active: () => running,
+      tick(dt) {
+        elapsed += dt;
+        lanes.forEach((L, i) => {
+          if (!L.busy) return;
+          L.t += dt;
+          if (L.t >= L.d) {
+            done++; L.t = 0; L.d = dur();
+            if (started >= TOTAL) { L.busy = false; laneEls[i].classList.remove("busy"); fills[i].style.transform = "scaleX(0)"; return; }
+            started++;
+          }
+          fills[i].style.transform = `scaleX(${Math.min(1, L.t / L.d).toFixed(3)})`;
+        });
+        if (done >= TOTAL) { done = TOTAL; running = false; }
+        countEl.textContent = fmt.format(done);
+        rateEl.textContent = running ? `${fmt.format(Math.round(done / Math.max(elapsed / 1000, 0.001)))} / sec` : `done in ${(elapsed / 1000).toFixed(1)}s`;
+      },
+    });
+    new IntersectionObserver((es, obs) => {
+      if (es[0].isIntersecting && !autoRan) { autoRan = true; obs.disconnect(); if (!reduce) start(LANES); }
+    }, { threshold: 0.6 }).observe(host);
+    $("#tax-1").addEventListener("click", () => start(1));
+    $("#tax-30").addEventListener("click", () => start(LANES));
+  })();
+
+  /* ---------- habit week ---------- */
+  (() => {
+    const habits = [["Bible reading", "1011111"], ["Exercise", "0110101"], ["Chart study", "1101110"], ["French", "1101011"], ["Coding", "1111111"]];
+    const day = new Intl.DateTimeFormat("en-GB", { timeZone: "Africa/Lagos", weekday: "narrow" });
+    const host = $("#habits"), rateEl = $("#habit-rate");
+    const state = habits.map(([, s]) => s.split("").map((ch) => ch === "1"));
+    let html = "<span></span>";
+    for (let i = 6; i >= 0; i--) html += `<span class="dh${i === 0 ? " today" : ""}">${day.format(new Date(Date.now() - i * 864e5))}</span>`;
+    html += "<span></span>";
+    habits.forEach(([name], r) => {
+      html += `<span class="hn" title="${name}">${name}</span>`;
+      for (let i = 0; i < 7; i++) html += `<button class="cell${i === 6 ? " today" : ""}" type="button" data-r="${r}" data-i="${i}" aria-label="${name}, ${i === 6 ? "today" : 6 - i + " days ago"}"></button>`;
+      html += `<span class="streak" data-r="${r}"><svg aria-hidden="true"><use href="#flame"/></svg><span>0</span></span>`;
+    });
+    host.innerHTML = html;
+    function render() {
+      let on = 0;
+      $$(".cell", host).forEach((b) => { const v = state[b.dataset.r][b.dataset.i]; b.classList.toggle("on", v); b.setAttribute("aria-pressed", String(v)); if (v) on++; });
+      $$(".streak", host).forEach((s) => {
+        const row = state[s.dataset.r];
+        let i = row[6] ? 6 : 5, n = 0;
+        while (i >= 0 && row[i]) { n++; i--; }
+        s.lastChild.textContent = n;
+        s.classList.toggle("hot", n >= 5);
+      });
+      rateEl.textContent = `${Math.round((on / 35) * 100)}%`;
+    }
+    host.addEventListener("click", (e) => {
+      const b = e.target.closest(".cell");
+      if (!b) return;
+      state[b.dataset.r][b.dataset.i] = !state[b.dataset.r][b.dataset.i];
+      render();
+    });
+    render();
+  })();
+
+  /* ---------- loan ledger ---------- */
+  (() => {
+    const seed = () => [
+      { who: "Mrs. F. Bello", ref: "LB-0142", principal: 500000, paid: 350000, due: "Due Thu" },
+      { who: "Chidi Okeke", ref: "LB-0157", principal: 250000, paid: 75000, due: "2 days late" },
+      { who: "Tunde Adeyemi", ref: "LB-0163", principal: 800000, paid: 775000, due: "Due Fri" },
+    ];
+    let loans = seed(), sel = 1;
+    const host = $("#ledger"), outEl = $("#outstanding"), btn = $("#repay");
+    function render() {
+      host.innerHTML = loans.map((l, i) => {
+        const settled = l.paid >= l.principal, pct = Math.min(100, (l.paid / l.principal) * 100);
+        const cls = settled ? "settled" : l.due.includes("late") ? "late" : "";
+        return `<button class="loan" type="button" data-i="${i}" aria-pressed="${i === sel}"><span class="who">${l.who}<span class="sub">${l.ref} · ${naira.format(l.paid)} of ${naira.format(l.principal)}</span></span><span class="prog"><i style="width:${pct}%"></i></span><span class="st ${cls}">${settled ? "Settled" : l.due}</span></button>`;
+      }).join("");
+      outEl.textContent = naira.format(loans.reduce((s, l) => s + Math.max(0, l.principal - l.paid), 0));
+      btn.textContent = loans.every((l) => l.paid >= l.principal) ? "Reset sample" : `Record ₦25,000 · ${loans[sel].who.split(" ").slice(-1)[0]}`;
+    }
+    host.addEventListener("click", (e) => { const b = e.target.closest(".loan"); if (b) { sel = +b.dataset.i; render(); } });
+    btn.addEventListener("click", () => {
+      if (loans.every((l) => l.paid >= l.principal)) { loans = seed(); sel = 1; render(); return; }
+      if (loans[sel].paid >= loans[sel].principal) sel = loans.findIndex((x) => x.paid < x.principal);
+      const t = loans[sel];
+      t.paid = Math.min(t.principal, t.paid + 25000);
+      if (t.due.includes("late") && t.paid > t.principal * 0.4) t.due = "Due Mon";
+      render();
+    });
+    render();
+  })();
+
+  /* ---------- copy email / phone ---------- */
+  function copyText(text, sel, btn, label) {
+    const done = () => { if (btn) { btn.textContent = "Copied"; setTimeout(() => (btn.textContent = label), 1600); } };
+    const fallback = () => {
+      const el = $(sel), r = document.createRange();
+      r.selectNodeContents(el);
+      const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+      if (btn) btn.textContent = "Selected: press Ctrl+C";
+      el.scrollIntoView({ block: "center", behavior: reduce ? "auto" : "smooth" });
+    };
+    try { navigator.clipboard.writeText(text).then(done, fallback); } catch { fallback(); }
+  }
+  const copyEmail = () => copyText("mpomowole@gmail.com", "#email", $("#copy"), "Copy email");
+  $("#copy").addEventListener("click", copyEmail);
+
+  /* ---------- command menu ---------- */
+  (() => {
+    const dlg = $("#cmdk"), input = $("#cmdk-q"), list = $("#cmdk-list");
+    const go = (sel) => $(sel).scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
+    const cmds = [
+      { label: "Go to work", hint: "Six systems", run: () => go("#work") },
+      { label: "Go to experience", hint: "LIRS, 2021 – now", run: () => go("#experience") },
+      { label: "Go to contact", hint: "Email and CV", run: () => go("#contact") },
+      { label: "Copy email address", hint: "mpomowole@gmail.com", run: copyEmail },
+      { label: "Copy phone number", hint: "+234 812 478 6454", run: () => copyText("+2348124786454", "#phone") },
+      { label: "Message on WhatsApp", hint: "wa.me/2348124786454", href: "https://wa.me/2348124786454" },
+      { label: "Download CV", hint: "PDF, one page", href: "Omowole_Precious_CV.pdf" },
+      { label: "Open Habit Ledger", hint: "habit-ledger-two.vercel.app", href: "https://habit-ledger-two.vercel.app" },
+      { label: "Open LoanBook", hint: "mpomowole.github.io/loanbook", href: "https://mpomowole.github.io/loanbook/" },
+    ];
+    let act = 0, shown = cmds;
+    function render() {
+      const q = input.value.trim().toLowerCase();
+      shown = cmds.filter((c) => !q || c.label.toLowerCase().includes(q) || c.hint.toLowerCase().includes(q));
+      act = Math.max(0, Math.min(act, shown.length - 1));
+      list.innerHTML = shown.length
+        ? shown.map((c, i) => {
+            const inner = `<span>${c.label}</span><small>${c.hint}</small>`;
+            const cls = `cmd${i === act ? " on" : ""}`;
+            return c.href
+              ? `<li role="option" aria-selected="${i === act}"><a class="${cls}" data-i="${i}" href="${c.href}" target="_blank" rel="noopener">${inner}</a></li>`
+              : `<li role="option" aria-selected="${i === act}"><button class="${cls}" data-i="${i}" type="button">${inner}</button></li>`;
+          }).join("")
+        : '<li class="empty">No matching commands</li>';
+    }
+    const coarse = matchMedia("(pointer: coarse)").matches;
+    function open() {
+      if (dlg.open) return;
+      input.value = ""; act = 0; render(); dlg.showModal();
+      if (coarse) input.blur(); else input.focus();
+    }
+    $("#cmdk-close").addEventListener("click", () => close());
+    function close() { if (dlg.open) dlg.close(); }
+    function run(i) {
+      const c = shown[i];
+      if (!c) return;
+      if (c.href) { list.querySelector(`[data-i="${i}"]`).click(); close(); }
+      else { close(); c.run(); }
+    }
+    $$("[data-cmdk]").forEach((b) => b.addEventListener("click", open));
+    addEventListener("keydown", (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") { e.preventDefault(); dlg.open ? close() : open(); }
+    });
+    input.addEventListener("input", () => { act = 0; render(); });
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowDown") { e.preventDefault(); act = (act + 1) % Math.max(1, shown.length); render(); }
+      else if (e.key === "ArrowUp") { e.preventDefault(); act = (act - 1 + shown.length) % Math.max(1, shown.length); render(); }
+      else if (e.key === "Enter") { e.preventDefault(); run(act); }
+    });
+    list.addEventListener("click", (e) => {
+      const el = e.target.closest(".cmd");
+      if (!el) return;
+      if (el.tagName === "A") { setTimeout(close, 0); return; }
+      run(+el.dataset.i);
+    });
+    list.addEventListener("pointermove", (e) => {
+      const el = e.target.closest(".cmd");
+      if (el && +el.dataset.i !== act) { act = +el.dataset.i; $$(".cmd", list).forEach((x) => x.classList.toggle("on", x === el)); }
+    });
+    dlg.addEventListener("click", (e) => { if (e.target === dlg) close(); });
+  })();
+
+  /* ---------- load time ---------- */
+  addEventListener("load", () => setTimeout(() => {
+    const nav = performance.getEntriesByType("navigation")[0];
+    const ms = nav ? Math.round(nav.loadEventEnd - nav.startTime) : 0;
+    if (ms > 0) $("#loadtime").textContent = `One hand-written HTML file, no framework. Loaded in ${fmt.format(ms)} ms.`;
+  }, 0));
+})();
+</script>
+</body>
+</html>
